@@ -14,7 +14,7 @@ with con:
 
 	
 	
-	cur.execute("INSERT INTO Participant (Participant_id, Name, Age, Gender) VALUES (1, 'Kay', 21, 'Male')")
+	cur.execute("INSERT INTO Participant (Participant_id, Name, Age, Gender) VALUES (null, 'Andrea', 21, 'Female')")
 	'''
 	cur.execute("INSERT INTO Books (title, author) VALUES ('Info Org', 'Bob')")
 	cur.execute("INSERT INTO Books (title, author) VALUES ('Info Law', 'Deidre')")
