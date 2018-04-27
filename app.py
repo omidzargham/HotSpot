@@ -7,9 +7,9 @@ import sys
 @app.route("/")
 def view_all_books():
 	
-	con = lite.connect("books.db")
+	con = lite.connect("hotspot.db")
 	cur = con.cursor()
-	cur.execute("select id, title, author from books")
+	cur.execute("select * from Participant")
 	rows = cur.fetchall()
 
 	return render_template("index.html", **locals())
