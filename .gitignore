@@ -101,5 +101,5 @@ ENV/
 .mypy_cache/
 
 *.db
-
+create_db.py
 __MACOSX/
