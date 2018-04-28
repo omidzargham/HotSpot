@@ -38,7 +38,7 @@ def get_book(id):
 	return render_template("viewbook.html", **locals())
 
 @app.route("/category")
-def get_category():
+def get_events_by_category():
 
 	con = lite.connect("hotspot.db")
 	cur = con.cursor()
