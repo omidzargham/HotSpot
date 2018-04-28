@@ -1,0 +1,38 @@
+
+.nav-link {
+	font-size: 20px;
+	margin: 5px;
+	color: #CADEED;
+}
+
+.logo {
+	font-size: 20px;
+	margin: 5px;
+	color: white;
+	position: absolute;
+	left: 10px;
+}
+
+.nav-link:hover {
+	color: white;
+}
+
+.nav-item {
+	margin: 10px;
+	display: inline-block;
+	float: right;
+}
+
+.nav-container {
+	background-color: #1B75BB;
+	padding: 5px;
+}
+
+li {
+	list-style: none;
+}
+
+a:hover {
+	text-decoration: none;
+	color: white;
+}
