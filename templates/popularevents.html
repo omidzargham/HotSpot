@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Our Book App - View Book</title>
+		<title>Our Book App</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,23 +11,31 @@
 
 	<body>
 		<div class="container-fluid">
-
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Details for book {{ id }}</h1>
+					<h1>All Participants</h1>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-md-12">
-					{% for row in rows %}
-					<p>ID: {{ row[0] }}</p>
-					<p>Book Title: {{ row[1] }}</p>
-					<p>Book Author: {{ row[2] }}</p>
-					{% endfor %}
+					<table class="table">
+						<tr>
+							<th>Title</th>
+							<th>Author</th>
+						</tr>
+						
+						{% for row in rows %}
+							<tr>
+								<td>{{ row[1] }}</td>
+								<td>{{ row[2] }}</td>
+							</tr>
+						{% endfor %}
+					</table>
 				</div>
 			</div>
+
+
 		</div>
-
 	</body>
 </html>

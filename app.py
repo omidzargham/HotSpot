@@ -3,39 +3,22 @@ app = Flask(__name__)
 
 import sqlite3 as lite
 import sys
- 
+
 @app.route("/")
-def view_all_books():
-	
+def home():
+	return render_template("index.html")
+
+@app.route("/popular-events")
+def get_top_events():
+
 	con = lite.connect("hotspot.db")
 	cur = con.cursor()
-	cur.execute("select * from Participant")
+	cur.execute("")
 	rows = cur.fetchall()
 
-	return render_template("index.html", **locals())
+	return render_template("popularevents.html", **locals())
 
-# @app.route("/addbook", methods=["GET", "POST"])
-# def add_book():
-
-# 	if request.method == "GET":
-# 		return render_template("addbook.html", **locals())
-
-# 	else:
-# 		title = request.form["title"]
-# 		author = request.form["author"]
-
-# 		con = lite.connect("books.db")
-# 		with con:
-# 			cur = con.cursor()
-# 			cur.execute("insert into Books (title, author) values ('{}', '{}')".format(title, author))
-
-# 		return redirect("/")
-
-
-@app.route("/book/<int:id>")
-def get_book(id):
-
-	return render_template("viewbook.html", **locals())
+	#GROUP BY Event.Event_id ORDER BY num_participants
 
 @app.route("/category")
 def get_events_by_category():
@@ -69,3 +52,21 @@ def get_pop_loc():
 
 if __name__ == "__main__":
     app.run()
+
+
+# @app.route("/addbook", methods=["GET", "POST"])
+# def add_book():
+
+# 	if request.method == "GET":
+# 		return render_template("addbook.html", **locals())
+
+# 	else:
+# 		title = request.form["title"]
+# 		author = request.form["author"]
+
+# 		con = lite.connect("books.db")
+# 		with con:
+# 			cur = con.cursor()
+# 			cur.execute("insert into Books (title, author) values ('{}', '{}')".format(title, author))
+
+# 		return redirect("/")
