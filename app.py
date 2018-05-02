@@ -41,9 +41,9 @@ def get_pop_loc():
 		con = lite.connect("hotspot.db")
 		cur = con.cursor()
 		if (city == ""):
-			cur.execute("select Event.Event_name, Event.Description, count(*) as num_participants FROM ((Event LEFT JOIN Attendance ON Event.Event_id = Attendance.Event_id) LEFT JOIN Participant ON Attendance.Participant_id = Participant.Participant_id) LEFT JOIN Destination ON Destination.Dest_id = Event.Dest_id WHERE Destination.State = '{}' AND  Participant.Participant_id IS NOT NULL GROUP BY Event.Event_id ORDER BY num_participants DESC LIMIT 5".format(state))
+			cur.execute("select Event.Event_name, Event.Description, Destination.City, Destination.State, count(*) as num_participants FROM ((Event LEFT JOIN Attendance ON Event.Event_id = Attendance.Event_id) LEFT JOIN Participant ON Attendance.Participant_id = Participant.Participant_id) LEFT JOIN Destination ON Destination.Dest_id = Event.Dest_id WHERE Destination.State = '{}' AND  Participant.Participant_id IS NOT NULL GROUP BY Event.Event_id ORDER BY num_participants DESC LIMIT 5".format(state))
 		else:
-			cur.execute("select Event.Event_name, Event.Description, count(*) as num_participants FROM ((Event LEFT JOIN Attendance ON Event.Event_id = Attendance.Event_id) LEFT JOIN Participant ON Attendance.Participant_id = Participant.Participant_id) LEFT JOIN Destination ON Destination.Dest_id = Event.Dest_id WHERE Destination.City = '{}' AND  Participant.Participant_id IS NOT NULL GROUP BY Event.Event_id ORDER BY num_participants DESC LIMIT 5".format(city))
+			cur.execute("select Event.Event_name, Event.Description, Destination.City, Destination.State, count(*) as num_participants FROM ((Event LEFT JOIN Attendance ON Event.Event_id = Attendance.Event_id) LEFT JOIN Participant ON Attendance.Participant_id = Participant.Participant_id) LEFT JOIN Destination ON Destination.Dest_id = Event.Dest_id WHERE Destination.City = '{}' AND  Participant.Participant_id IS NOT NULL GROUP BY Event.Event_id ORDER BY num_participants DESC LIMIT 5".format(city))
 		rows = cur.fetchall()
 		return render_template("view-poploc.html", **locals())
 
