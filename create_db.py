@@ -4,8 +4,8 @@ import random
 
 cats = ['food','music','games','movies','artists','shop','holiday','academic','political']
 event = ['find hilfiger', '4/20', 'cute dogs day', 'rock concert', 'gamers unite', 'food for the poor', 'Cherry Blossom Festival', 'Music Busking', 'Alcatraz Island Tour', 'Geek Show 2: Bindlecon', 'Late Night Improv', 'SF Giants Baseball', 'Outside Lands', 'Wicked','The Lion King', 'American Musical Journey', 'Frozen', 'Hamilton', 'Art at the Met', 'Japanese Tea Garden']
-cities = ['berkeley', 'san francisco', 'oakland', 'los angeles', 'las vegas']
-state = ['ca']
+cities = ['Berkeley', 'San Francisco', 'Oakland', 'Los Angeles', 'Las Vegas']
+state = ['California']
 
 
 con = lite.connect("hotspot.db")
@@ -27,7 +27,7 @@ with con:
     for i in range(0,len(cities)):
         did = i
         dname = cities[i]
-        state = 'ca'
+        state = 'California'
         city = cities[i]
         cur.execute("INSERT INTO Destination (Dest_id, Dest_name, State, City) VALUES ("+str(did)+",\'"+dname+"\',\'"+state+"\',\'"+city+"\')") #{}, {},{},{},{},{},{},{})".format(eid,ename,did,stime,etime,descrip,cid,cost))
             
@@ -37,9 +37,15 @@ with con:
         eid = i
         ename = event[i]
         did = random.randint(0,len(city)-1)
-        stime = '2018-01-01 1:23'
+        randomhour = random.randint(0,23)
+        randomminute = random.randint(10,59)
+        randomyear = random.randint(2015,2018)
+        randommonth = random.randint(1,9)
+        randomday = random.randint(10,28)
+        stime = str(randomyear) + "-0" + str(randommonth) + "-" + str(randomday) + " " + str(randomhour) + ":" + str(randomminute)
         etime = '2018-01-01 1:23'
-        descrip = 'description'
+        listofdescriptions = ["a fun event", "a nice event", "a cool event", "a lame event", "best event ever"]
+        descrip = listofdescriptions[random.randint(0,len(listofdescriptions)-1)]
         cid = random.randint(0,len(cats)-1)
         cost = 1.0
         participants = [k for k in range(0,100)]

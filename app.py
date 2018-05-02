@@ -16,12 +16,15 @@ def get_top_events():
 	cur = con.cursor()
 	cur.execute("select Event.Event_name, Event.Description, Event.Start_time, count(*)  as num_participants from attendance join event on attendance.event_id = event.event_id GROUP BY Event.Event_id order by num_participants DESC")
 	rows = cur.fetchall()
-	realrows = rows
+	realrows = []
+	nightrows = []
 	for row in rows:
 		if row[2] is not None:
 			obj = datetime.strptime(row[2], "%Y-%m-%d %H:%M")
-			theindex = realrows.index(row)
-			realrows[theindex] = (row[0], row[1], obj.strftime('%H:%M'), row[3])
+			if obj.hour in range(6,18):
+				realrows.append(row)
+			else:
+				nightrows.append(row)
 
 	return render_template("popularevents.html", **locals())
 
@@ -32,7 +35,7 @@ def get_events_by_category():
 
 	con = lite.connect("hotspot.db")
 	cur = con.cursor()
-	cur.execute("select max(ct), eid, cid, Category.Name, Event.Event_name from Event, Category, (select att.ct as ct, Event.Event_id as eid, Event.Cat_id as cid from Event, (select count(*) as ct, Event_id from Attendance group by Event_id) as att where Event.Event_id = att.Event_id) as a where a.cid = Category.Cat_id and Event.Cat_id = a.cid group by a.cid order by Category.Name") 
+	cur.execute("select max(ct), eid, cid, Category.Name, Event.Event_name from Event, Category, (select att.ct as ct, Event.Event_id as eid, Event.Cat_id as cid from Event, (select count(*) as ct, Event_id from Attendance group by Event_id) as att where Event.Event_id = att.Event_id) as a where a.cid = Category.Cat_id and Event.Cat_id = a.cid and a.eid = Event.Event_id group by a.cid order by Category.Name") 
 	rows = cur.fetchall()
 	print(rows)
 	return render_template("category.html", **locals())
