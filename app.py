@@ -32,8 +32,9 @@ def get_events_by_category():
 
 	con = lite.connect("hotspot.db")
 	cur = con.cursor()
-	cur.execute("select max(ct), eid, cid, Category.Name from Category, (select att.ct as ct, Event.Event_id as eid, Event.Cat_id as cid from Event, (select count(*) as ct, Event_id from Attendance group by Event_id) as att where Event.Event_id = att.Event_id) as a where a.cid = Category.Cat_id group by a.cid order by Category.Name") 
+	cur.execute("select max(ct), eid, cid, Category.Name, Event.Event_name from Event, Category, (select att.ct as ct, Event.Event_id as eid, Event.Cat_id as cid from Event, (select count(*) as ct, Event_id from Attendance group by Event_id) as att where Event.Event_id = att.Event_id) as a where a.cid = Category.Cat_id and Event.Cat_id = a.cid group by a.cid order by Category.Name") 
 	rows = cur.fetchall()
+	print(rows)
 	return render_template("category.html", **locals())
 
 @app.route("/pop-loc", methods=["GET", "POST"])
