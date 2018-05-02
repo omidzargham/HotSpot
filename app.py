@@ -20,14 +20,13 @@ def get_top_events():
 
 	#GROUP BY Event.Event_id ORDER BY num_participants
 
-@app.route("/category")
+@app.route("/category", method=["GET"])
 def get_events_by_category():
 
 	con = lite.connect("hotspot.db")
 	cur = con.cursor()
 	cur.execute("select max(ct), eid, cid, Category.Name from Category, (select att.ct as ct, Event.Event_id as eid, Event.Cat_id as cid from Event, (select count(*) as ct, Event_id from Attendance group by Event_id) as att where Event.Event_id = att.Event_id) as a where a.cid = Category.Cat_id group by a.cid order by Category.Name") 
-	rows = get_best_events_by_category()
-	print(rows)
+	rows = cur.fetchall()
 	return render_template("category.html", **locals())
 
 @app.route("/pop-loc", methods=["GET", "POST"])
