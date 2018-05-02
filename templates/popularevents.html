@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>HotSpot - Popular Events</title>
+		<title>Top Events</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,25 +12,25 @@
 
 	<body>
 		<div class="nav-container">
-			<div class="row">
-				<li class="logo">
-					<a href="/" class="logo">HOTSPOT</a>
-				</li>
-				<li class="nav-item">
-					<a href="/pop-loc" class="nav-link">Search Events by Location</a>
-				</li>
-				<li class="nav-item">
-					<a href="/popular-events" class="nav-link">Popular Events</a>
-				</li>
-				<li class="nav-item">
-					<a href="/category" class="nav-link">Popular Events by Category</a>
-				</li>
+				<div class="row">
+					<li class="logo">
+						<a href="/" class="logo">HOTSPOT</a>
+					</li>
+					<li class="nav-item">
+						<a href="/pop-loc" class="nav-link">Search Events by Location</a>
+					</li>
+					<li class="nav-item">
+						<a href="/popular-events" class="nav-link">Popular Events</a>
+					</li>
+					<li class="nav-item">
+						<a href="/category" class="nav-link">Popular Events by Category</a>
+					</li>
+				</div>
 			</div>
-		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Popular Events</h1>
+					<h1>Popular Daytime Events</h1>
 				</div>
 			</div>
 
@@ -38,14 +38,46 @@
 				<div class="col-md-12">
 					<table class="table">
 						<tr>
-							<th>Title</th>
-							<th>Author</th>
+							<th>Event Name</th>
+                            <th>Description</th>
+                            <th>Time</th>
+                            <th># Attendees</th>
 						</tr>
 						
 						{% for row in rows %}
 							<tr>
-								<td>{{ row[1] }}</td>
-								<td>{{ row[2] }}</td>
+								<td>{{ row[0] }}</td>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>
+                                <td>{{ row[3] }}</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+            </div>
+            
+            <div class="row">
+				<div class="col-md-12">
+					<h1>Popular Nighttime Events</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table">
+						<tr>
+							<th>Event Name</th>
+                            <th>Description</th>
+                            <th>Time</th>
+                            <th># Attendees</th>
+						</tr>
+						
+						{% for row in rows %}
+							<tr>
+								<td>{{ row[0] }}</td>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>
+                                <td>{{ row[3] }}</td>
 							</tr>
 						{% endfor %}
 					</table>

@@ -3,6 +3,7 @@ app = Flask(__name__)
 
 import sqlite3 as lite
 import sys
+from datetime import datetime
 
 @app.route("/")
 def home():
@@ -13,8 +14,14 @@ def get_top_events():
 
 	con = lite.connect("hotspot.db")
 	cur = con.cursor()
-	cur.execute("")
+	cur.execute("select Event.Event_name, Event.Description, Event.Start_time, count(*)  as num_participants from attendance join event on attendance.event_id = event.event_id GROUP BY Event.Event_id order by num_participants DESC")
 	rows = cur.fetchall()
+	realrows = rows
+	for row in rows:
+		if row[2] is not None:
+			obj = datetime.strptime(row[2], "%Y-%m-%d %H:%M")
+			theindex = realrows.index(row)
+			realrows[theindex] = (row[0], row[1], obj.strftime('%H:%M'), row[3])
 
 	return render_template("popularevents.html", **locals())
 
