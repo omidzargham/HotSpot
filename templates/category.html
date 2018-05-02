@@ -31,16 +31,30 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Popular Events By Category</h1>
+					<h1>Popular Categories</h1>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-md-12">
-					{% for row in rows %}
+					<table class="table">
+						<tr>
+							<th>Category</th>
+                            <th>Number of Attendees</th>
+						</tr>
+						
+						{% for row in rows %}
+							<tr>
+								<td>{{ row[3] }}</td>
+                                <td>{{ row[0] }}</td>
+							</tr>
+						{% endfor %}
+					</table>
+
+					<!--{% for row in rows %}
 					<p>{{ row[3] }}</p>
 					<p>Popularity: {{ row[0] }}</p>
-					{% endfor %}
+					{% endfor %}-->
 				</div>
 			</div>
 		</div>
