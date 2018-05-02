@@ -20,7 +20,7 @@ def get_top_events():
 
 	#GROUP BY Event.Event_id ORDER BY num_participants
 
-@app.route("/category", method=["GET"])
+@app.route("/category", methods=["GET"])
 def get_events_by_category():
 
 	con = lite.connect("hotspot.db")
