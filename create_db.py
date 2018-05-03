@@ -36,7 +36,7 @@ with con:
     for i in range(0,len(event)):
         eid = i
         ename = event[i]
-        did = random.randint(0,len(city)-1)
+        did = random.randint(0,len(cities)-1)
         randomhour = random.randint(0,23)
         randomminute = random.randint(10,59)
         randomyear = random.randint(2015,2018)
